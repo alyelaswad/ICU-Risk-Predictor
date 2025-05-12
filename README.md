@@ -40,6 +40,10 @@ cd ICU-Risk-Predictor
 ## Results
 Our evaluation shows that Random Forest and XGBoost classifiers achieve the best performance for mortality prediction, with AUC scores above 0.80. The models demonstrate good discriminative ability between survival and mortality outcomes.
 
+## Future Work
+- Continous predictions (non-classification problems) to access the risk of each patient
+- Assembling this work into a single notebook
+- Adding gui to input patient data and expect a medical recommendation based on how the patient is doing (hopeful)
 
 ## Acknowledgments
 - PhysioNet for providing the clinical datasets
