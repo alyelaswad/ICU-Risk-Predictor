@@ -1,0 +1,39 @@
+
+1. Explaining the dataset and how it is formatted
+- Time-series data from the first 48 hours of a patient’s ICU stay.
+- Contains 42 attributes, though not all are recorded for every patient.
+  - Categorized into 6 demographic and 38 medical-related attributes.
+
+The first step was to transform the time-series data into a pandas DataFrame.  
+Some features (e.g., urine output) were summed, others were averaged or converted into rates of change.  
+This transformed dataset was imported into the Jupyter Notebook as raw_to_def or rtd.
+
+2. Handling missing data
+Some attributes are missing for certain patients.  
+To address this, we used SimpleImputer from sklearn, which fills in missing values using strategies like:
+- Mean
+- Median
+- Most frequent
+We realized that this is not always going to be practical, since averages are not accurate representations of every single data point.
+So, through the sklearn documentation page, we found IterativeImputer which basically predicts the missing values using the other attributes and is trained on the rest of the dataset, which does have this attribute and it is not missing
+
+3. Handling unbalanced classes
+We explored the following techniques:
+
+- SMOTE: Creates synthetic samples of the minority class by interpolating between existing minority class samples and their nearest neighbors.
+- ADASYN: Similar to SMOTE but adaptively generates more synthetic samples in regions where the minority class is harder to learn (i.e., sparse or ambiguous areas).
+- SMOTETomek: Combines SMOTE with Tomek Links, which removes overlapping or ambiguous samples near class boundaries — especially from the majority class — making the decision boundary cleaner.
+
+4. Comparing models
+
+Mortality Classification:
+- Evaluated using ROC AUC
+- Used confusion matrices for interpretability
+
+Risk Factor Classification:
+- Evaluated with accuracy scores
+- Visualized with confusion matrices
+
+Instead of predicting mortality directly (which can be random), we used the risk factor column to classify patients into LOW, MID, and HIGH risk categories.
+
+5. Models and how they worked
